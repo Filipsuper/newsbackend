@@ -19,6 +19,8 @@ router.get("/", async (req, res) => {
 
         const article = articleArr[0];
 
+        console.log("Article", article);
+
         res.json(article);
     } catch (error) {
         console.error("Error fetching user:", error);
