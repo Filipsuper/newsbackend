@@ -16,10 +16,7 @@ const articleSchema = new mongoose.Schema({
     sentimentScore: {
         type: Number,
     },
-    omxPreMarketData: {
-        type: Object,
-        required: true
-    }
+    omxPreMarketData: { type: mongoose.Schema.Types.Mixed, required: true }  // Allow flexibility
 }, {
     timestamps: true
 });
