@@ -15,9 +15,11 @@ router.get("/", async (req, res) => {
     try {
         const db = await mongoose.connect(MONGOURI);
         const collection = db.connection.collection("articles");
-        const article = await collection.find({}).sort({ createdAt: -1 }).limit(1).toArray();
+        const articleArr = await collection.find({}).sort({ createdAt: -1 }).limit(1).toArray();
 
-        res.json({ article });
+        const article = articleArr[0];
+
+        res.json(article);
     } catch (error) {
         console.error("Error fetching user:", error);
         res.status(500).json({ error: "Failed to fetch user" });

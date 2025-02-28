@@ -20,9 +20,16 @@ console.log("MODE", MODE)
 
 const MONGOURI = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGODB}`;
 
+app.use((req, res, next) => {
+    console.log(req.method, req.url);
+    next();
+})
+
 app.use("/api/auth", auth)
 app.use("/api/user", user)
 app.use("/api/data", data)
+
+
 
 app.listen(PORT, async () => {
     console.log("DB_URL", MONGOURI);
