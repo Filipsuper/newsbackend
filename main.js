@@ -11,8 +11,11 @@ configDotenv()
 const PORT = process.env.PORT ?? 8000;
 app.use(express.json());
 
-//allow origin
-app.use(cors())
+//allow origin 
+app.use(cors({
+    origin: "*"
+}))
+
 
 const MODE = process.env.MODE
 
