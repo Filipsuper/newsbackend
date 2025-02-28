@@ -12,10 +12,7 @@ const PORT = process.env.PORT ?? 8000;
 app.use(express.json());
 
 //allow origin 
-app.use(cors({
-    origin: "*"
-}))
-
+app.use(cors())
 
 const MODE = process.env.MODE
 
