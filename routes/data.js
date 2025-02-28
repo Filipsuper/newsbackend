@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 
         console.log("Article", article);
 
-        res.json(article);
+        res.status(200).json(article);
     } catch (error) {
         console.error("Error fetching user:", error);
         res.status(500).json({ error: "Failed to fetch user" });
