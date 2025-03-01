@@ -18,10 +18,11 @@ const articleSchema = new mongoose.Schema({
     },
     omxPreMarketData: { type: mongoose.Schema.Types.Mixed, required: true }  // Allow flexibility
 }, {
-    timestamps: true
+    timestamps: true,
+    strict: false
+
 });
 
 
-export const Article = mongoose.model('Article', articleSchema);
-
+export const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 
