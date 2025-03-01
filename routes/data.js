@@ -17,11 +17,11 @@ router.get("/", async (req, res) => {
         const collection = db.connection.collection("articles");
         const articleArr = await collection.find({}).sort({ createdAt: -1 }).limit(1).toArray();
 
-        const article = articleArr[0];
+        // const article = articleArr[0];
 
-        console.log("Article", article);
+        // console.log("Article", article);
 
-        res.status(200).json(article);
+        res.status(200).json(articleArr);
     } catch (error) {
         console.error("Error fetching user:", error);
         res.status(500).json({ error: "Failed to fetch user" });
