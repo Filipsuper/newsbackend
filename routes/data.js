@@ -11,11 +11,17 @@ const router = express.Router();
 
 const MONGOURI = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGODB}`;
 
-router.get("/:id", async (req, res) => {
+const parseParam = (param) => {
+    return param.replaceAll("-", " ")
+}
+
+router.get("/:title", async (req, res) => {
     try {
-        console.log("req.params.id", req.params.id);
-        const articleId = new mongoose.Types.ObjectId(req.params.id);
-        const article = await Article.findById(articleId);
+        console.log("req.params.id", req.params.title);
+
+        const parsedTitle = parseParam(req.params.title)
+
+        const article = await Article.findOne({ title: parsedTitle })
 
         res.status(200).json(article);
     } catch (error) {
