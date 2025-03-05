@@ -12,7 +12,8 @@ const router = express.Router();
 const MONGOURI = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGODB}`;
 
 const parseParam = (param) => {
-    return param.replaceAll("-", " ")
+    const removeLines = param.replaceAll("-", " ")
+    return removeLines.replaceAll("_", "-")
 }
 
 router.get("/:title", async (req, res) => {
