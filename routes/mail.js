@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
         await newMail.save();
 
 
-        res.status(200).json();
+        res.status(200).json({ msg: "Added mail" });
     } catch (error) {
         console.error("Error fetching user:", error);
         res.status(500).json({ error: "Failed to add mail user" });
