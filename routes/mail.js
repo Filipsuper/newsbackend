@@ -5,19 +5,34 @@ import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 import { Article } from "../models/article.js";
 import { Mail } from "../models/mail.js";
+import { createContact } from "../utils/resend.js";
 
 // use env file in ../
 configDotenv();
 
 const router = express.Router();
 
+router.get("/unsubscribe", async (req, res) => {
+    const { mail } = req.query
+    console.log(mail)
+    try {
+        if (!mail) {
+            return res.status(400).json({ error: "No mail provided" })
+        }
+
+        const res = await Mail.deleteOne({ mail })
+
+        res.status(200).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to remove mail user" });
+    }
+
+})
+
 // USER LOGIC
 router.post("/", async (req, res) => {
-    console.log("ADDING MAIL")
     try {
         const { mail } = req.body;
-
-        console.log("MAIL:", req.body)
 
         if (!mail) {
             return res.status(400).json({ error: "Skriv in en mail" });
@@ -32,6 +47,7 @@ router.post("/", async (req, res) => {
 
         await newMail.save();
 
+        createContact({ email: mail })
 
         res.status(200).json({ msg: "Added mail" });
     } catch (error) {
@@ -39,6 +55,9 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Failed to add mail user" });
     }
 });
+
+
+
 
 
 
