@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ error: "Skriv in en mail" });
         }
 
-        if (Mail.findOne({ mail })) {
+        if (Mail.exists({ mail })) {
             return res.status(400).json({ error: "Mail taken", msg: "Mailen är redan tagen" })
         }
 
