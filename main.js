@@ -5,6 +5,7 @@ import cors from "cors";
 import auth from "./routes/auth.js"
 import user from "./routes/user.js"
 import data from "./routes/data.js"
+import mail from "./routes/mail.js"
 
 const app = express();
 configDotenv()
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", auth)
 app.use("/api/user", user)
 app.use("/api/data", data)
+app.use("/api/mail", mail)
 
 
 
