@@ -34,7 +34,6 @@ app.use("/api/mail", mail)
 
 
 app.listen(PORT, async () => {
-    console.log("DB_URL", MONGOURI);
     try {
         await mongoose.connect(MONGOURI, { dbName: "morningsum" });
         // Connect to MongoDB

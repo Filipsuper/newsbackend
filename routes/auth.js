@@ -10,7 +10,6 @@ configDotenv();
 
 const router = express.Router()
 const JWT_KEY = process.env.JWT_KEY
-console.log(JWT_KEY)
 
 router.post("/add", async (req, res) => {
     try {
