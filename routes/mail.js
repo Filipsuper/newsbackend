@@ -43,21 +43,25 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ error: "Skriv in en mail" });
         }
 
-        const check = await Mail.findOne({ mail })
+        const exists = await Mail.exists({ mail })
 
-        if (check.subscribed === true) {
+        if (exists) {
             return res.status(400).json({ error: "Mail taken", msg: "Mailen är redan tagen" })
-        } else if (check.subscribed === false) {
-            check.subscribed = true;
-            await check.save()
-            return res.status(200).json({ msg: "Added mail" });
         }
+
+        // if (check.subscribed === true) {
+        //     return res.status(400).json({ error: "Mail taken", msg: "Mailen är redan tagen" })
+        // } else if (check.subscribed === false) {
+        //     check.subscribed = true;
+        //     await check.save()
+        //     return res.status(200).json({ msg: "Added mail" });
+        // }
 
         const newMail = new Mail({ mail });
 
         await newMail.save();
 
-        createContact({ email: mail })
+        // createContact({ email: mail })
 
         res.status(200).json({ msg: "Added mail" });
     } catch (error) {
